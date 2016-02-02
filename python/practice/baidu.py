@@ -1,9 +1,13 @@
 #coding=UTF-8
 from selenium import webdriver
+from time import sleep
+file_info = open('search.txt','r')
+contents = file_info.readlines()
 driver = webdriver.Chrome()
-#WebDriver driver = new RemoteWebDriver("http://localhost:9515", DesiredCapabilities.chrome())
 driver.get("http://www.baidu.com/")
-
-driver.find_element_by_id("kw").send_keys("tablet")
-driver.find_element_by_id("su").click()
-#driver.quit()
+for search in contents:
+  driver.find_element_by_id("kw").clear()
+  driver.find_element_by_id("kw").send_keys(search)
+  driver.find_element_by_id("su").click()
+  sleep(3)
+driver.quit()
